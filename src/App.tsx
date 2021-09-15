@@ -2,6 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { HashRouter as Router } from "react-router-dom";
 
+import { Web3Provider } from '@ethersproject/providers';
+import { Web3ReactProvider } from '@web3-react/core';
+
+import WalletConnectButton from './components/WalletConnectButton';
 import { View } from './components/View';
 import { appRoutes } from './routes/routes';
 import { NavigationBar } from './components/NavigationBar';
@@ -9,28 +13,40 @@ import { NavigationBar } from './components/NavigationBar';
 const PageContainer = styled(View)`
   flex: 1;
   flex-direction: column;
-  background-color: rgba(255,10,70,0.2);
 `
 
+
+
 function App() {
+  const getLibrary = (provider: any): Web3Provider => {
+    const library = new Web3Provider(provider)
+    library.pollingInterval = 12000
+    return library;
+  }
+
   return (
-    <Router>
-      <NavigationBar items={appRoutes} />
-      <PageContainer>
-        {
-          appRoutes.map((route) => {
-            return (
-              <>
-                <View id={route.name}/>
-                {
-                  route.content
-                }
-              </>
-            )
-          })
-        }
-      </PageContainer>
-    </Router>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Router>
+        <NavigationBar items={appRoutes}>
+          <WalletConnectButton connected={false} />
+        </NavigationBar>
+
+        <PageContainer>
+          {
+            appRoutes.map((route) => {
+              return (
+                <>
+                  <View id={route.name} />
+                  {
+                    route.content
+                  }
+                </>
+              )
+            })
+          }
+        </PageContainer>
+      </Router>
+    </Web3ReactProvider>
   );
 }
 

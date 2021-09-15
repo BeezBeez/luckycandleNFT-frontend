@@ -12,11 +12,12 @@ const NavigationContainer = styled.nav`
     position: fixed;
     left: 0;
     right: 0;
+    max-height: 48px;
     background-color: rgba(0, 0, 0, 0.8);
     list-style: none;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link) <{ noHoverEffect?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,9 +33,10 @@ const StyledLink = styled(Link)`
 
     &:hover {
         border-radius: 0px;
-        background: rgba(255,255,255,0.85);
+        background: ${props => !props.noHoverEffect ? 'rgb(255,255,255)' : 'transparent'};
         color: rgb(30, 30, 30);
-        margin: -16px 0px;
+        margin: ${props => !props.noHoverEffect ? '-16px 0px' : '0px'};
+        transform: ${props => !props.noHoverEffect ? 'scale(1.0)' : 'scale(1.1)'};
     }
     
     &:active {
@@ -45,12 +47,8 @@ const StyledLink = styled(Link)`
 `;
 
 export const NavigationItem: React.FC<NavigationItemProps> = (props) => {
-    const onLinkClicked = () => {
-
-    }
-
     return (
-        <StyledLink onClick={onLinkClicked} to={props.path}>{props.displayName}</StyledLink>
+        <StyledLink noHoverEffect={props.name.includes('$')} to={props.path}>{props.displayName}</StyledLink>
     );
 }
 
@@ -62,7 +60,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
                     {
                         props.items.map((entry) => {
                             return (
-                                <NavigationItem key={`items_${entry.name}`} path={entry.to} displayName={entry.displayName} />
+                                <NavigationItem key={`items_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />
                             );
                         })
                     }
@@ -71,9 +69,12 @@ export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
                     {
                         props.rightItems && props.rightItems.map((entry) => {
                             return (
-                                <NavigationItem key={`rightItems_${entry.name}`} path={entry.to} displayName={entry.displayName} />
+                                <NavigationItem key={`rightItems_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />
                             );
                         })
+                    }
+                    {
+                        props.children
                     }
                 </View>
             </NavigationContainer>

@@ -1,3 +1,4 @@
+import Logo from '../components/Logo';
 import Home from '../views/Home';
 import About from '../views/About';
 import Roadmap from '../views/Roadmap';
@@ -6,8 +7,8 @@ import { RouteEntry } from './types';
 export const appRoutes: RouteEntry[] = [
     {
         to: '#home',
-        name: 'home-logo',
-        displayName: 'Home-Logo',
+        name: '$home-logo',
+        displayName: <Logo/>,
         content: null
     },
     {
@@ -19,8 +20,14 @@ export const appRoutes: RouteEntry[] = [
     {
         to: '#about',
         name: 'about',
-        displayName: 'About',
+        displayName: 'Our Story',
         content: <About />
+    },
+    {
+        to: '#about',
+        name: 'about',
+        displayName: 'The Collection',
+        content: <About /> // TODO : Replace with Collection view
     },
     {
         to: '#roadmap',

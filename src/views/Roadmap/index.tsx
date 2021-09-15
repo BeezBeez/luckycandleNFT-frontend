@@ -3,7 +3,7 @@ import { Page } from '../../components/Page';
 
 const Roadmap = () => {
     return (
-        <Page>
+        <Page style={{ backgroundColor: 'rgb(30,30,50)' }}>
             Roadmap page
         </Page>
     );

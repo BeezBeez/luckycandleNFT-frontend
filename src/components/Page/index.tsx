@@ -1,15 +1,14 @@
+import React, { HTMLAttributes } from "react";
 import styled from "styled-components";
 import { View } from "../View";
-
-import { PageProps } from "./types";
 
 const Container = styled(View)`
     height: 100vh;
 `;
 
-export const Page: React.FC<PageProps> = (props) => {
+export const Page: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
     return (
-        <Container id={props.anchor}>
+        <Container {...props}>
             {props.children}
         </Container>
     )
