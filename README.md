@@ -1,7 +1,7 @@
 # LuckyCandle NFT
 
-LuckyCandle NFT frontend one page. Built using React and styled-components.
-This project was developed for LuckyCandle Project.
+LuckyCandle NFT one page source code.
+Built using React and styled-components, this project was developed for LuckyCandle Project.
 
 ## Available Scripts
 
