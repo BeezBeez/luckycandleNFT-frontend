@@ -7,15 +7,17 @@ import { Web3ReactProvider } from '@web3-react/core';
 
 import WalletConnectButton from './components/WalletConnectButton';
 import { View } from './components/View';
-import { appRoutes } from './routes/routes';
+import { appRoutes, rightLinks } from './routes/routes';
 import { NavigationBar } from './components/NavigationBar';
+
+const AnimatedCursor = require("react-animated-cursor");
 
 const PageContainer = styled(View)`
   flex: 1;
   flex-direction: column;
 `
 
-
+// TODO : Change dominant color to green.
 
 function App() {
   const getLibrary = (provider: any): Web3Provider => {
@@ -26,8 +28,9 @@ function App() {
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
+      <AnimatedCursor color="255,255,255"/>
       <Router>
-        <NavigationBar items={appRoutes}>
+        <NavigationBar items={appRoutes} rightItems={rightLinks}>
           <WalletConnectButton connected={false} />
         </NavigationBar>
 

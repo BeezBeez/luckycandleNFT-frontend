@@ -49,7 +49,6 @@ const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
         }
     }
 
-
     return (
         <StyledConnectButton connected={isConnected} onClick={() => {
             onConnectClicked(isConnected);

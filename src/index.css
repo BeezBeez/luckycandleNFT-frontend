@@ -45,3 +45,33 @@ h5 {
 h6 {
   font-size: 1em;
 }
+
+p {
+  font-size: 1.15em;
+  line-height: 1.35em;
+}
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: rgb(55, 0, 10);
+  padding: 64px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(126, 0, 52);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(136, 9, 79);
+}
