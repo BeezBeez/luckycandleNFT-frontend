@@ -60,18 +60,18 @@ p {
 /* Track */
 
 ::-webkit-scrollbar-track {
-  background: rgb(55, 0, 10);
+  background: rgb(0, 55, 29);
   padding: 64px;
 }
 
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(126, 0, 52);
+  background: rgb(0, 126, 78);
 }
 
 /* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(136, 9, 79);
+  background: rgb(9, 136, 94);
 }

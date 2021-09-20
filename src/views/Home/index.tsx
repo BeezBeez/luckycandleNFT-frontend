@@ -9,7 +9,7 @@ import DropCountdown from '../../components/DropCountdown';
 const Title = styled.h1`
     font-family: 'Righteous';
     font-size: 96px;
-    background: linear-gradient(120deg,#e5d4ff 0%, rgb(162, 122, 255) 100%);
+    background: linear-gradient(120deg,#bfffc3 0%, rgb(45, 211, 161) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -24,7 +24,7 @@ const Home = () => {
             <BackgroundVideo brightness="0.7" name="red_blobs" />
             <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
                 <Title>LuckyCandle</Title>
-                <Subtitle><span style={{color: 'rgb(255, 70, 120)'}}>GENESIS </span>- DECEMBER 32 @ 12PM CET</Subtitle>
+                <Subtitle><span style={{color: 'rgb(70, 255, 153)'}}>GENESIS </span>- DECEMBER 32 @ 12PM CET</Subtitle>
                 <View>
                     <DropCountdown date="09/20/2021 22:00">
                         <View>

@@ -3,10 +3,10 @@ import styled, { keyframes } from 'styled-components';
 
 const fadeIn = (x: string) => keyframes`
     from {
-        filter: brightness(0.0);
+        filter: brightness(0.0) hue-rotate(0deg);
     }
     to {
-        filter: brightness(${x});
+        filter: brightness(${x}) hue-rotate(160deg);
     }
 `;
 
@@ -21,7 +21,7 @@ const VideoComponent = styled.video<{ brightness: string }>`
     opacity: 1.0;
     width: 100%;
     height: auto;
-    filter: brightness(0.0);
+    filter: brightness(0.0) hue-rotate(110deg);
     animation: ${props => fadeIn(props.brightness)} 0.5s 2s alternate forwards;
 `;
 

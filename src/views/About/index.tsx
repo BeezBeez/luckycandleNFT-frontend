@@ -6,7 +6,7 @@ import { View } from '../../components/View';
 const Title = styled.h1`
     font-family: 'Righteous';
     font-size: 96px;
-    background: linear-gradient(to right,rgb(255,120,180) 0%, rgb(255, 40, 90) 100%);
+    background: linear-gradient(to right,rgb(106, 255, 144) 0%, rgb(18, 197, 123) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -15,14 +15,13 @@ const Title = styled.h1`
 const CollectionBorder = styled.div`
     display: flex;
     height: 368px;
-    border: solid 2px rgb(255, 170, 190);
+    border: solid 2px rgb(170, 255, 196);
     border-radius: 64px;
-    box-shadow: 0px 0px 6px 2px rgb(255, 126, 156), 0px 0px 24px 4px rgb(255, 40, 90), inset 0px 0px 24px 4px rgb(255, 40, 90);
+    box-shadow: 0px 0px 6px 2px rgb(126, 255, 154), 0px 0px 24px 4px rgb(40, 255, 112), inset 0px 0px 24px 4px rgb(40, 255, 112);
     transition: height 1s cubic-bezier(0.77, 0, 0.175, 1);
 
     &:hover {
         height: 400px;
-        
     }
 `;
 
@@ -34,7 +33,7 @@ const CollectionPreview = styled.img`
 
 const About = () => {
     return (
-        <Page style={{backdropFilter: 'blur(32px)', backgroundColor: 'rgba(50,0,20,0.8)', borderRadius: '64px 64px 0px 0px', boxShadow: '0 0 64px 16px rgba(50,0,20,0.8)'}}>
+        <Page style={{backdropFilter: 'blur(32px)', backgroundColor: 'rgba(0, 50, 30, 0.8)', borderRadius: '64px 64px 0px 0px', boxShadow: '0 0 64px 16px rgba(0, 50, 30, 0.8)'}}>
             <View style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <View style={{ alignItems: 'start', justifyContent: 'center', flexDirection: 'column', width: '45%' }}>
                     <Title>OUR STORY</Title>

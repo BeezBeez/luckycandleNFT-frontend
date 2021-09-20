@@ -26,11 +26,11 @@ const TimeText = styled.span`
     0 0 5px #fff,
     0 0 10px #fff,
     0 0 20px #fff,
-    0 0 40px #ff0077,
-    0 0 80px #ff0077,
-    0 0 90px #ff0077,
-    0 0 100px #ff0077,
-    0 0 150px #ff0077;
+    0 0 40px #00ff73,
+    0 0 80px #00ff73,
+    0 0 90px #00ffd5,
+    0 0 100px #00ffd5,
+    0 0 150px #00ffd5;
 `;
 
 const OverlayTimeContainer = styled(View)`
