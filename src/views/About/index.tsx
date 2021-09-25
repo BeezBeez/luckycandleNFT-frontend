@@ -34,7 +34,7 @@ const About = () => {
                     </p>
                 </TextContainer>
                 <CollectionBorder>
-                    <CollectionPreview src={`${process.env.PUBLIC_URL}/assets/images/Lucky_Candle_expo_lite.gif`} />
+                    <CollectionPreview src={`${process.env.PUBLIC_URL}/assets/images/Lucky_candle_expo_lite.gif`} />
                 </CollectionBorder>
             </Subpage>
         </Page>
