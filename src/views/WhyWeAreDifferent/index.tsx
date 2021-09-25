@@ -1,50 +1,41 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Page } from '../../components/Page';
+import { Page, Subpage, TextContainer } from '../../components/Page';
 import { View } from '../../components/View';
-
-const Title = styled.h1`
-    font-family: 'Righteous';
-    font-size: 72px;
-    background: linear-gradient(345deg,#78fff4 0%, rgb(35, 231, 133) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-`;
-
-const CollectionBorder = styled.div`
-    display: flex;
-    height: 368px;
-    border: solid 2px rgb(170, 255, 196);
-    border-radius: 64px;
-    box-shadow: 0px 0px 6px 2px rgb(126, 255, 154), 0px 0px 24px 4px rgb(40, 255, 112), inset 0px 0px 24px 4px rgb(40, 255, 112);
-    transition: height 1s cubic-bezier(0.77, 0, 0.175, 1);
-
-    &:hover {
-        height: 400px;
-    }
-`;
-
-const CollectionPreview = styled.img`
-    flex: 1;
-    padding: 24px;
-    border-radius: 64px;
-`
+import { Title } from '../../components/Text';
+import { CollectionBorder, CollectionPreview } from '../../components/CollectionItems';
 
 const WhyWeAreDifferent = () => {
     return (
-        <Page style={{backdropFilter: 'blur(64px)', backgroundColor: 'rgba(0, 80, 50, 0.8)', borderRadius: '64px 64px 0px 0px', boxShadow: '0 0 64px 16px rgba(0, 80, 50, 0.8)'}}>
-            <View style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
+        <Page style={{ backgroundColor: 'rgb(0, 80, 50)', boxShadow: '0 0 64px 16px rgba(0, 80, 50, 0.8)' }}>
+            <Subpage style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <CollectionBorder>
                     <CollectionPreview src={process.env.PUBLIC_URL + '/assets/images/NFTs/pfp1.png'} />
                 </CollectionBorder>
-                <View style={{ alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column', width: '50%' }}>
+                <TextContainer style={{ alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
                     <Title>WHY WE ARE DIFFERENT</Title>
+                    <h2>The community</h2>
                     <p>
-                        Angel inhumans spot dracula darkstar tigra korvac blastaar. Enchantress brood spider-man galactus, shang-chi wolverine toad. Quentinquire wilsonfisk aim doom cypher modok atlas paladin? Praxagora moltenman dormammu norrinradd macgargan cerebro sprite spider-man shield mauler kraven forge. Howard hobgoblin thor ink wiccan magus mimic gambit jarvis scorpion x-51 norrinradd parker. Magus excalibur nova fantomex ink ghostrider runaways professorx moleman. Toad korath humantorch johnnyblaze tonystark firebird pryde changeling sif reaper. Dagger blastaar arnim mayparker captainbritain. Shard uatu thunderbolts invaders praxagora arachne patriot juggernaut ink vanisher gorgon howlett aim. Tombstone, jocasta caretaker swordsman forge.
+                        We want to grow a community where the chance to be succesfull in the project is equal for
+                        everybody. Even if you have a big or a small wallet.
                     </p>
-                </View>
-            </View>
+                    <p>
+                        Being part of the Lucky Candles project will let you participate in crazy events, have a chance to
+                        make your wish come true, feeling real connections with other investors and feeling lucky. For us the
+                        community is the most important thing, we want you to feel confortable around our beautiful
+                        candles.
+                    </p>
+                    <h2>The royalties</h2>
+                    <p>
+                        We want to put 5% of secondary market sales directly back into your pockets. We want that holding
+                        our NFT and helping the project to grow. We want to make sure that keeping our NFTs in your
+                        possession and supporting the project can be of maximum benefit to you.
+                    </p>
+                    <p>
+                        Our roadmap is here to let you see what we are planning to do for the community. Why we will be
+                        useful to you in the future. You deserve to be threated well.
+                    </p>
+                </TextContainer>
+            </Subpage>
         </Page>
     );
 }

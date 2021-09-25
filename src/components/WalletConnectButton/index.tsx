@@ -5,16 +5,17 @@ import styled from "styled-components";
 
 export const StyledConnectButton = styled.button<{ connected: boolean }>`
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
-    padding: 8px 16px;
+    padding: 16px 24px;
     border: none;
     color: white;
-    background-color: ${props => props.connected ? "rgba(0,255,90,0.2)" : "rgba(255,50,90,0.2)"};
+    background-color: ${props => props.connected ? "rgba(0,255,90,0.3)" : "rgba(255,50,90,0.3)"};
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 20px;
     transition: all 0.2s ease-in-out;
-
+    
     &:hover {
         background-color:  ${props => props.connected ? "rgba(0,255,90,0.4)" : "rgba(255,50,90,0.4)"};
         cursor: pointer;
@@ -23,6 +24,14 @@ export const StyledConnectButton = styled.button<{ connected: boolean }>`
     &:active {
         background-color:  ${props => props.connected ? "rgba(0,255,90,0.3)" : "rgba(255,50,90,0.3)"};
         transform: scale(0.95);
+    }
+    
+    @media (max-width: 500px) {
+        position: absolute;
+        right: 8px;
+        padding: 12px 16px;
+        margin-left: 32px;
+        height: auto;
     }
 `
 

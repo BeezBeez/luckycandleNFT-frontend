@@ -23,11 +23,20 @@ const VideoComponent = styled.video<{ brightness: string }>`
     height: auto;
     filter: brightness(0.0) hue-rotate(110deg);
     animation: ${props => fadeIn(props.brightness)} 0.5s 2s alternate forwards;
+    object-fit: cover;
+    
+    @media (max-width: 1000px) {
+        height: 100vh;
+        width: 177.77777778vh;
+        min-width: 100%;
+        min-height: 56.25vw;
+        left: -50%;
+    }
 `;
 
 export const BackgroundVideo = (props: { name: string, brightness: string }) => {
     return (
-        <VideoComponent brightness={props.brightness} loop autoPlay muted>
+        <VideoComponent brightness={props.brightness} loop autoPlay muted playsInline>
             <source src={`${process.env.PUBLIC_URL}/assets/videos/${props.name}.mp4`} type="video/mp4" />
         </VideoComponent>
     )

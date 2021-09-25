@@ -1,13 +1,13 @@
 * {
   user-select: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Quicksand', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Quicksand', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Quicksand', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Quicksand', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: rgb(30, 30, 30);
@@ -23,15 +23,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 4vw;
 }
 
 h2 {
-  font-size: 3em;
+  font-size: 3vw;
 }
 
 h3 {
-  font-size: 2.5em;
+  font-size: 2.5vw;
 }
 
 h4 {
@@ -39,7 +39,7 @@ h4 {
 }
 
 h5 {
-  font-size: 1.35em;
+  font-size: 1.1vw;
 }
 
 h6 {
@@ -47,14 +47,46 @@ h6 {
 }
 
 p {
-  font-size: 1.15em;
+  font-size: 0.9vw;
   line-height: 1.35em;
+}
+
+@media (max-width: 500px) {
+  html {
+    width: 100vw;
+  }
+  body {
+    width: 100vw;
+  }
+  h1 {
+    font-size: 4vw;
+  }
+  h2 {
+    font-size: 3vw;
+  }
+  h3 {
+    font-size: 2.5vw;
+  }
+  h4 {
+    font-size: 1.7em;
+  }
+  h5 {
+    font-size: 3vw;
+  }
+  h6 {
+    font-size: 1em;
+  }
+  p {
+    font-size: 3vw;
+    line-height: 1.35em;
+  }
 }
 
 /* width */
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 0px;
 }
 
 /* Track */

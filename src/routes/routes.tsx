@@ -7,6 +7,7 @@ import Roadmap from '../views/Roadmap';
 import WhyWeAreDifferent from '../views/WhyWeAreDifferent';
 
 import { RouteEntry } from './types';
+import Philosophy from '../views/Philosophy';
 
 const Icon = styled.img`
     height: 100%;
@@ -14,17 +15,23 @@ const Icon = styled.img`
 `;
 
 export const appRoutes: RouteEntry[] = [
-    {
-        to: '#home',
-        name: '$home-logo',
-        displayName: <Logo />,
-        content: null
-    },
+    // {
+    //     to: '#home',
+    //     name: '$home-logo',
+    //     displayName: <Logo />,
+    //     content: null
+    // },
     {
         to: '#home',
         name: 'home',
         displayName: 'Home',
         content: <Home />
+    },
+    {
+        to: '#philosophy',
+        name: 'philosophy',
+        displayName: 'Philosophy',
+        content: <Philosophy />
     },
     {
         to: '#about',
@@ -66,7 +73,19 @@ export const rightLinks: RouteEntry[] = [
         content: null
     },
     {
-        to: "https://telegram/luckycandle_nft",
+        to: "https://twitter.com/lucky_candle",
+        name: '$twitter',
+        displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/twitter.png`} alt="discord" />,
+        content: null
+    },
+    {
+        to: "https://instagram.com/luckycandlenft",
+        name: '$instagram',
+        displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/instagram.png`} alt="instagram" />,
+        content: null
+    },
+    {
+        to: "https://telegram.com/luckycandle_nft",
         name: '$telegram-group',
         displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/telegram.png`} alt="telegram" />,
         content: null
