@@ -63,8 +63,8 @@ const Home = () => {
                     <DropCountdown date="Sat, 16 Oct 2021 21:00:00 GMT">
                         {/* Date du drop : Samedi 16 Octobre 23h */}
                         <View style={{margin: '32px 0', flexDirection: 'row', gap: 24}}>
-                            <Button onClick={() => window.location.href = 'https://discord.gg/3jTTMx8D3j'}>Mint your LuckyCandle.</Button>
-                            <PurpleButton onClick={() => window.location.href = 'https://discord.gg/3jTTMx8D3j'}>Join our discord!</PurpleButton>
+                            <Button>Mint your LuckyCandle.</Button>
+                            <PurpleButton onClick={() => window.open('https://discord.gg/3jTTMx8D3j', '_blank')}>Join our discord!</PurpleButton>
                         </View>
                     </DropCountdown>
                 </View>

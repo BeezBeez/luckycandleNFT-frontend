@@ -102,7 +102,7 @@ const countdownRenderer: CountdownRendererFn = ({ days, hours, minutes, seconds,
                         <h3>Seconds</h3>
                     </TimeContainer>
                 </TimeSuperContainer>
-                <PurpleButton onClick={() => window.location.href = 'https://discord.gg/3jTTMx8D3j'}>Join our discord!</PurpleButton>
+                <PurpleButton onClick={() => window.open('https://discord.gg/3jTTMx8D3j', '_blank')}>Join our discord!</PurpleButton>
             </View>
         )
     }
