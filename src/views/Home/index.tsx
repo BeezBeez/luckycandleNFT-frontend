@@ -52,6 +52,7 @@ const ChevronAnimation = keyframes`
 const ChevronDown = styled.img`
     position: absolute;
     z-index: -1;
+    height: 10vh;
     animation: ${ChevronAnimation} 2.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 `
 
