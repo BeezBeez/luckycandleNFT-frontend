@@ -22,7 +22,7 @@ const TimeText = styled.span`
     font-family: 'Major Mono Display', monospace;
     margin: 0;
     font-weight: bold;
-    font-size: 5vw;
+    font-size: 4vw;
     text-shadow:
         0 0 5px #fff,
         0 0 10px #fff,
@@ -32,6 +32,10 @@ const TimeText = styled.span`
         0 0 90px #00ffd5,
         0 0 100px #00ffd5,
         0 0 150px #00ffd5;
+
+    @media (max-width: 500px) {
+        font-size: 8vw;
+    }
 `;
 
 const OverlayTimeContainer = styled(View)`

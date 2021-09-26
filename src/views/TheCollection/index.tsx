@@ -5,10 +5,17 @@ import { Title } from '../../components/Text';
 import { CollectionBorder, CollectionPreview } from '../../components/CollectionItems';
 
 const Sample = styled(CollectionPreview)`
-    width: 12vw;
-    height: 12vw;
+    width: 8vw;
+    height: 8vw;
     margin: 0vw;
     border-radius: 16%;
+    box-shadow: inset 0px 0px 0px rgba(40, 150, 80, 0.8);
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: inset 0px 0px 24px 8px rgba(40, 150, 80, 0.8);
+    }
 
     @media (max-width: 500px) {
         width: 25vw;
@@ -20,6 +27,7 @@ const Grid = styled(CollectionBorder)`
     display: grid;
     width: auto;
     height: auto;
+    border-radius: 32px;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 1vw;
@@ -35,10 +43,18 @@ const Grid = styled(CollectionBorder)`
     }
 `
 
+const PageTitle = styled(Title)`
+    margin-top: 32px;
+
+    @media (max-width: 500px) {
+        margin-top: 0px;
+    }
+`
+
 const TheCollection = () => {
     return (
-        <Page style={{ backgroundColor: 'rgb(0, 50, 20)', justifyContent: 'space-evenly' }}>
-            <Title>COLLECTION SAMPLES</Title>
+        <Page rounded style={{ backgroundColor: 'rgb(0, 50, 20)', justifyContent: 'space-evenly' }}>
+            <PageTitle>COLLECTION SAMPLES</PageTitle>
             <Grid>
                 <Sample src={`${process.env.PUBLIC_URL}/assets/images/NFTs/3.jpg`} />
                 <Sample src={`${process.env.PUBLIC_URL}/assets/images/NFTs/8.jpg`} />

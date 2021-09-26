@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BackgroundVideo } from '../../components/BackgroundVideo';
 import { View } from '../../components/View';
@@ -30,28 +30,44 @@ const Subtitle = styled.h5`
 
 const ChevronAnimation = keyframes`
     0% {
-        bottom: 64px;
+        top: 70vh;
         opacity: 0;
     }
     50% {
-        bottom: 32px;
+        top: 85vh;
         opacity: 1;
     }
-    100% {
-        bottom: 32px;
+    75% {
+        top: 85vh;
         opacity: 1;
+        transform: scale(1.25);
+    }
+    100% {
+        top: 85vh;
+        opacity: 0;
+        transform: scale(0);
     }
 `
 
 const ChevronDown = styled.img`
     position: absolute;
-    bottom: 32px;
-    animation: ${ChevronAnimation} 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+    z-index: -1;
+    animation: ${ChevronAnimation} 2.5s cubic-bezier(0.77, 0, 0.175, 1) infinite;
 `
 
-const Home = () => {
+const ButtonView = styled(View)`
+    margin: 32px 0px;
+    flex-direction: row;
+    gap: 32px;
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+`
+
+const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
     return (
-        <Page style={{ alignItems: 'center', justifyContent: 'center', overflowX: 'hidden' }}>
+        <>
             <Clover position={{ left: `${Math.random() * 20}%`, top: `${Math.random() * 80}%` }} />
             <Clover position={{ right: `${Math.random() * 50}%`, top: `${Math.random() * 30}%` }} />
             <Clover position={{ right: `${Math.random() * 20}%`, top: `${Math.random() * 60}%` }} />
@@ -62,14 +78,79 @@ const Home = () => {
                 <View>
                     <DropCountdown date="Sat, 16 Oct 2021 21:00:00 GMT">
                         {/* Date du drop : Samedi 16 Octobre 23h */}
-                        <View style={{margin: '32px 0', flexDirection: 'row', gap: 24}}>
-                            <Button>Mint your LuckyCandle.</Button>
+                        <ButtonView>
+                            <Button onClick={props.onMintButtonClick}>Mint your LuckyCandle.</Button>
                             <PurpleButton onClick={() => window.open('https://discord.gg/3jTTMx8D3j', '_blank')}>Join our discord!</PurpleButton>
-                        </View>
+                        </ButtonView>
                     </DropCountdown>
                 </View>
             </View>
             <ChevronDown src={`${process.env.PUBLIC_URL}/assets/images/icons/chevron-down.png`} />
+        </>
+    )
+}
+
+const Content = styled(View)`
+    opacity: 1;
+`
+
+const Overlay = styled.div<{expand?: boolean}>`
+    position: absolute;
+    width: 128px;
+    height: 128px;
+    background-color: rgb(80, 200, 90);
+    border-radius: 9999px;
+    z-index: 999;
+    transform: ${props => props.expand ? 'scale(25)' : 'scale(0)'};
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+`
+
+const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
+    return (
+        <Content>
+            <Clover position={{ left: `${Math.random() * 20}%`, top: `${Math.random() * 80}%` }} />
+            <Clover position={{ right: `${Math.random() * 50}%`, top: `${Math.random() * 30}%` }} />
+            <Clover position={{ right: `${Math.random() * 20}%`, top: `${Math.random() * 60}%` }} />
+            <BackgroundVideo blurAnim brightness="0.7" name="red_blobs" />
+            <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
+                <Button onClick={props.onBackButtonClick}>{"< Back"}</Button>
+            </View>
+        </Content>
+    )
+}
+
+const Home = () => {
+    const [showMintPage, setShowMintPage] = useState(false);
+    const [expandOverlay, setExpandOverlay] = useState(false);
+    const handleMintClick = () => {
+        setExpandOverlay(true);
+        setTimeout(() => {
+            setShowMintPage(true);
+            setTimeout(() => {
+                setExpandOverlay(false);
+            }, 500);
+        }, 500);
+    }
+    
+    const handleBackClick = () => {
+        setExpandOverlay(true);
+        setTimeout(() => {
+            setShowMintPage(false);
+            setTimeout(() => {
+                setExpandOverlay(false);
+            }, 500);
+        }, 500);
+    }
+
+    return (
+        <Page style={{ alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            <Overlay expand={expandOverlay}/>
+            {
+                showMintPage ?
+                    <MintPage onBackButtonClick={handleBackClick} />
+                    :
+                    <HomeContent onMintButtonClick={handleMintClick} />
+            }
         </Page>
     );
 }

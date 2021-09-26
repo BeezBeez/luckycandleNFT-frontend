@@ -11,23 +11,25 @@ const blurOut = () => keyframes`
     }
 `;
 
-const Container = styled(View)`
+const Container = styled(View) <{ rounded?: boolean }>`
     position: sticky;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     height: 100vh;
     top: 0px;
     filter: blur(64px);
+    border-radius: ${props => props.rounded ? "4vw 4vw 0px 0px" : "0px"};
+    padding: 3vw;
     animation: ${blurOut} 0.5s 2s alternate forwards;
 
     @media (max-width: 500px) {
         position: static;
+        border-radius: 0px;
     }
 `;
 
-export const Page: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+export const Page: React.FC<HTMLAttributes<HTMLDivElement> & { rounded?: boolean }> = (props) => {
     return (
         <Container {...props}>
             {props.children}

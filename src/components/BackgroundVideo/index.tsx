@@ -2,15 +2,30 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const fadeIn = (x: string) => keyframes`
-    from {
-        filter: brightness(0.0) hue-rotate(0deg);
+    0% {
+        filter: brightness(0.0) hue-rotate(160deg);
     }
-    to {
+    75% {
+        filter: brightness(0.0) hue-rotate(160deg);
+    }
+    100% {
         filter: brightness(${x}) hue-rotate(160deg);
     }
 `;
 
-const VideoComponent = styled.video<{ brightness: string }>`
+const blurOut = (x: string) => keyframes`
+    0% {
+        filter: blur(${parseInt(x) * 8}px) hue-rotate(160deg);
+    }
+    75% {
+        filter: blur(${parseInt(x) * 8}px) hue-rotate(160deg);
+    }
+    100% {
+        filter: blur(0px) hue-rotate(160deg);
+    }
+`;
+
+const VideoComponent = styled.video<{ brightness: string, blurAnim?: boolean }>`
     background-size: cover;
     position: absolute;
     top: 0;
@@ -21,11 +36,12 @@ const VideoComponent = styled.video<{ brightness: string }>`
     opacity: 1.0;
     width: 100%;
     height: auto;
-    filter: brightness(0.0) hue-rotate(110deg);
-    animation: ${props => fadeIn(props.brightness)} 0.5s 2s alternate forwards;
-    object-fit: cover;
+    filter: brightness(0) hue-rotate(160deg);
+    animation: ${props => props.blurAnim ? blurOut(props.brightness) : fadeIn(props.brightness)} 2.5s 0s alternate forwards;
+    overflow: hidden;
     
     @media (max-width: 1000px) {
+        position: fixed;
         height: 100vh;
         width: 177.77777778vh;
         min-width: 100%;
@@ -34,9 +50,9 @@ const VideoComponent = styled.video<{ brightness: string }>`
     }
 `;
 
-export const BackgroundVideo = (props: { name: string, brightness: string }) => {
+export const BackgroundVideo = (props: { name: string, brightness: string, blurAnim?: boolean }) => {
     return (
-        <VideoComponent brightness={props.brightness} loop autoPlay muted playsInline>
+        <VideoComponent blurAnim={props.blurAnim} brightness={props.brightness} loop autoPlay muted playsInline>
             <source src={`${process.env.PUBLIC_URL}/assets/videos/${props.name}.mp4`} type="video/mp4" />
         </VideoComponent>
     )

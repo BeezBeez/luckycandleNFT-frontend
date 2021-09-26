@@ -7,7 +7,7 @@ import { CollectionBorder, CollectionPreview } from '../../components/Collection
 
 const About = () => {
     return (
-        <Page style={{ backgroundColor: 'rgb(0, 50, 30)', boxShadow: '0 0 64px 16px rgba(0, 50, 30, 0.8)' }}>
+        <Page rounded style={{ backgroundColor: 'rgb(0, 50, 30)', boxShadow: '0 0 64px 16px rgba(0, 50, 30, 0.8)' }}>
             <Subpage style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <TextContainer>
                     <Title>OUR STORY</Title>

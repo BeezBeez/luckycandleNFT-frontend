@@ -5,7 +5,7 @@ import { CollectionBorder, CollectionPreview } from '../../components/Collection
 
 const Philosophy = () => {
     return (
-        <Page style={{ backgroundColor: 'rgb(0, 80, 50)', boxShadow: '0 0 64px 16px rgba(0, 80, 50, 0.8)' }}>
+        <Page rounded style={{ backgroundColor: 'rgb(0, 80, 50)', boxShadow: '0 0 64px 16px rgba(0, 80, 50, 0.8)' }}>
             <Subpage style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <CollectionBorder>
                     <CollectionPreview src={`${process.env.PUBLIC_URL}/assets/images/NFTs/6.jpg`} />

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import Logo from '../components/Logo';
 import Home from '../views/Home';
 import About from '../views/About';
 import TheCollection from '../views/TheCollection';
 import Roadmap from '../views/Roadmap';
 import WhyWeAreDifferent from '../views/WhyWeAreDifferent';
+import Royalties from '../views/Royalties';
 
 import { RouteEntry } from './types';
 import Philosophy from '../views/Philosophy';
@@ -15,12 +15,6 @@ const Icon = styled.img`
 `;
 
 export const appRoutes: RouteEntry[] = [
-    // {
-    //     to: '#home',
-    //     name: '$home-logo',
-    //     displayName: <Logo />,
-    //     content: null
-    // },
     {
         to: '#home',
         name: 'home',
@@ -46,6 +40,12 @@ export const appRoutes: RouteEntry[] = [
         content: <WhyWeAreDifferent />
     },
     {
+        to: '',
+        name: 'why',
+        displayName: 'Royalties',
+        content: <Royalties />
+    },
+    {
         to: '#collection',
         name: 'collection',
         displayName: 'The Collection',
@@ -61,7 +61,7 @@ export const appRoutes: RouteEntry[] = [
 
 export const rightLinks: RouteEntry[] = [
     {
-        to: "https://opeansea.io/collection/luckycandle",
+        to: "https://opensea.io/collection/luckycandle",
         name: '$opensea',
         displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/opensea.png`} alt="opensea" />,
         content: null

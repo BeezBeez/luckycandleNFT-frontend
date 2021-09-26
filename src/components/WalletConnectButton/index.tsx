@@ -28,10 +28,9 @@ export const StyledConnectButton = styled.button<{ connected: boolean }>`
     
     @media (max-width: 500px) {
         position: absolute;
-        right: 8px;
+        right: 0px;
         padding: 12px 16px;
-        margin-left: 32px;
-        height: auto;
+        height: 100%;
     }
 `
 

@@ -26,10 +26,11 @@ const CenterLine = styled.div`
     justify-content: space-evenly;
     width: 2px;
     height: 100%;
-    padding-top: 128px;
-    background-color: white;
+    padding-top: 192px;
+    background: linear-gradient(rgba(255,255,255, 0) 0%, white 25%, white 75%, rgba(255,255,255, 0) 100%);
     
     @media (max-width: 500px) {
+        padding-top: 128px;
         justify-content: start;
     }
 `;
@@ -51,6 +52,11 @@ const Point = styled.div`
         width: 96px;
         height: 96px;
         box-shadow: 0px 0px 16px 12px rgba(60, 190, 125, 0.5);
+
+        @media (max-width: 500px) {
+            width: 64px;
+            height: 64px;
+        }
     }
 
     @media (max-width: 500px) {
@@ -66,7 +72,7 @@ const DescriptionContainer = styled.div<{ inverseDirection?: boolean }>`
     justify-content: center;
     left: ${props => props.inverseDirection ? 'auto' : '128px'};
     right: ${props => props.inverseDirection ? '128px' : 'auto'};
-    width: 256px;
+    width: 20vw;
     padding: 4px 32px;
     border-radius: 16px;
     background: linear-gradient(150deg, rgba(60, 190, 80, 0.4), rgba(60, 790, 80, 0.05) 70%);
@@ -93,9 +99,13 @@ const MDescriptionContainer = styled.div`
     }
 `
 
+const LittleCandle = styled.img`
+
+`
+
 const Roadmap = () => {
     return (
-        <Page style={{ backgroundColor: 'rgb(0,80,50)' }}>
+        <Page rounded style={{ backgroundColor: 'rgb(0,80,50)', height: '130vh' }}>
             <Clover position={{ right: "128px" }} />
             <Clover position={{ left: "128px" }} />
             <Title>Roadmap</Title>
@@ -149,6 +159,7 @@ const Roadmap = () => {
                     </p>
                 </MDescriptionContainer>
             </CenterLine>
+            <LittleCandle />
         </Page>
     );
 }
