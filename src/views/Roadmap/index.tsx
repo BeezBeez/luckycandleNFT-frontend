@@ -128,15 +128,6 @@ const Roadmap = () => {
                 <Point>
                     <h5>50%</h5>
                     <DescriptionContainer inverseDirection>
-                        <p>Make a wish, we make it come true</p>
-                    </DescriptionContainer>
-                </Point>
-                <MDescriptionContainer>
-                    <p>Make a wish, we make it come true</p>
-                </MDescriptionContainer>
-                <Point>
-                    <h5>75%</h5>
-                    <DescriptionContainer>
                         <p>Unlocking a world tour</p>
                     </DescriptionContainer>
                 </Point>
@@ -144,18 +135,25 @@ const Roadmap = () => {
                     <p>Unlocking a world tour</p>
                 </MDescriptionContainer>
                 <Point>
+                    <h5>75%</h5>
+                    <DescriptionContainer>
+                        <p>Make a wish, we make it come true</p>
+                    </DescriptionContainer>
+                </Point>
+                <MDescriptionContainer>
+                    <p>Make a wish, we make it come true</p>
+                </MDescriptionContainer>
+                <Point>
                     <h5>100%</h5>
                     <DescriptionContainer inverseDirection>
                         <p>
-                            The candles are coming to you, your NFTs in trading card format in a protective
-                            case
+                            ...
                         </p>
                     </DescriptionContainer>
                 </Point>
                 <MDescriptionContainer>
                     <p>
-                        The candles are coming to you, your NFTs in trading card format in a protective
-                        case
+                        ...
                     </p>
                 </MDescriptionContainer>
             </CenterLine>

@@ -47,8 +47,9 @@ h6 {
 }
 
 p {
-  font-size: 1.2vw;
-  line-height: 1.35em;
+  margin: 16px 0px;
+  font-size: 1.25vw;
+  line-height: 1.15em;
 }
 
 @media (max-width: 500px) {

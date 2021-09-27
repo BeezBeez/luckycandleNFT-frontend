@@ -74,10 +74,10 @@ const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
             <Clover position={{ right: `${Math.random() * 20}%`, top: `${Math.random() * 60}%` }} />
             <BackgroundVideo brightness="0.7" name="red_blobs" />
             <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
-                <Title>LuckyCandle</Title>
+                <Title>Lucky Candle</Title>
                 <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>LUCKY MINT </span>- OCTOBER 16 @ 9PM GMT</Subtitle>
                 <View>
-                    <DropCountdown date="Sat, 16 Oct 2021 21:00:00 GMT">
+                    <DropCountdown date="Sat, 16 Oct 2020 21:00:00 GMT">
                         {/* Date du drop : Samedi 16 Octobre 23h */}
                         <ButtonView>
                             <Button onClick={props.onMintButtonClick}>Mint your LuckyCandle.</Button>

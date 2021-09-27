@@ -13,19 +13,19 @@ const Philosophy = () => {
                 <TextContainer style={{ textAlign: 'start' }}>
                     <Title>PROJECT'S PHILOSOPHY</Title>
                     <p>
-                        Lucky Candles is a collection of <strong>13 000 unique NFT’s</strong> on the Ethereum Blockchain that can be
-                        mint for <strong>0.1 ETH</strong>. It’s an NFT project based on the Japanese candles that you all love to see on your
+                        <strong>Lucky Candle</strong> is a collection of <strong>13 000 unique NFT’s</strong> on the Ethereum Blockchain that can be
+                        mint for <strong>0.1 ETH</strong>. It’s an NFT project based on the <strong>Japanese candles</strong> that you all love to see on your
                         charts. More likely when they are green.
                     </p>
                     <p>
-                        We are a project that feels that it’s important for us to put the community first.
+                        We are a project that feels that it’s important for us to <strong>put the community first.</strong>
                     </p>
                     <p>
-                        We want to give you access to a variety of things, to build a close-knit community who’s bringing you
-                        luck.
+                        We want to give you access to a variety of things, to <strong>build a close-knit community who’s bringing you
+                        luck.</strong>
                     </p>
                     <p>
-                        <strong>Lucky Candles is not only an NFT project it’s also an experience, a chance.</strong>
+                        <strong>Lucky Candle is not only an NFT project it’s also an experience, a chance.</strong>
                     </p>
                 </TextContainer>
             </Subpage>

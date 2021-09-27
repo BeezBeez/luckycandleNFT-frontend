@@ -13,39 +13,47 @@ const MobileTextContainer = styled(TextContainer)`
     }
 `
 
+const MSubpage = styled(Subpage)`
+    transform: translateY(-25%);
+
+    @media (max-width: 500px) {
+        transform: translateY(0%);
+    }
+`
+
 const WhyWeAreDifferent = () => {
     return (
         <Page rounded style={{ backgroundColor: 'rgb(0, 80, 50)', boxShadow: '0 0 64px 16px rgba(0, 80, 50, 0.8)', height: '120vh' }}>
-            <Subpage style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
+            <MSubpage style={{ alignItems: 'center', justifyContent: 'space-evenly' }}>
                 <CollectionBorder>
                     <CollectionPreview src={process.env.PUBLIC_URL + '/assets/images/NFTs/pfp1.png'} />
                 </CollectionBorder>
                 <TextContainer style={{ alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
                     <Title>WHY WE ARE DIFFERENT</Title>
                     <p>
-                        We want to grow a community where the chance to be succesfull in the project is equal for
-                        everybody. Even if you have a big or a small wallet.
+                        <strong>We want to grow a community</strong> where the chance to be succesfull in the project is equal for
+                        everybody. <strong>Even if you have a big or a small wallet.</strong>
                     </p>
                     <p>
-                        Being part of the Lucky Candles project will let you participate in crazy events, have a chance to
-                        make your wish come true, feeling real connections with other investors and feeling lucky. For us the
-                        community is the most important thing, we want you to feel confortable around our beautiful
+                        Being part of the <strong>Lucky Candle project</strong> will let you participate in <strong>crazy events</strong>, have a chance to
+                        <strong>make your wish come true</strong>, feeling real connections with other investors and feeling lucky. For us the
+                        <strong>community is the most important thing</strong>, we want you to feel confortable around our beautiful
                         candles.
                     </p>
                 </TextContainer>
                 <MobileTextContainer style={{ backgroundColor: 'rgb(0, 80, 50)', alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
-                    <Title>ROYALTIES SYSTEM</Title>
+                    <Title>ROYALTIES SYSTEMS</Title>
                     <p>
-                        We want to put 5% of secondary market sales directly back into your pockets. We want that holding
+                        <strong>We want to put 5% of secondary market sales directly back into your pockets.</strong> We want that holding
                         our NFT and helping the project to grow. We want to make sure that keeping our NFTs in your
                         possession and supporting the project can be of maximum benefit to you.
                     </p>
                     <p>
-                        Our roadmap is here to let you see what we are planning to do for the community. Why we will be
-                        useful to you in the future. You deserve to be threated well.
+                        <strong>Our roadmap</strong> is here to let you see what we are planning to do for the community. <strong>Why we will be
+                        useful to you in the future.</strong> You deserve to be threated well.
                     </p>
                 </MobileTextContainer>
-            </Subpage>
+            </MSubpage>
         </Page>
     );
 }
