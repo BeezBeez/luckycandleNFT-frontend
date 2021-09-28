@@ -147,13 +147,13 @@ const Roadmap = () => {
                     <h5>100%</h5>
                     <DescriptionContainer inverseDirection>
                         <p>
-                            ...
+                            A surprise will be revealed a few days before the drop !
                         </p>
                     </DescriptionContainer>
                 </Point>
                 <MDescriptionContainer>
                     <p>
-                        ...
+                        A surprise will be revealed a few days before the drop !
                     </p>
                 </MDescriptionContainer>
             </CenterLine>

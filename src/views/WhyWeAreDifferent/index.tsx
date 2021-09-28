@@ -31,12 +31,12 @@ const WhyWeAreDifferent = () => {
                 <TextContainer style={{ alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
                     <Title>WHY WE ARE DIFFERENT</Title>
                     <p>
-                        <strong>We want to grow a community</strong> where the chance to be succesfull in the project is equal for
+                        <strong>We want to build a community</strong> where the chance to be succesfull in the project is equal for
                         everybody. <strong>Even if you have a big or a small wallet.</strong>
                     </p>
                     <p>
-                        Being part of the <strong>Lucky Candle project</strong> will let you participate in <strong>crazy events</strong>, have a chance to
-                        <strong>make your wish come true</strong>, feeling real connections with other investors and feeling lucky. For us the
+                        Being part of the <strong>Lucky Candle project</strong> will let you participate in <strong>crazy events</strong>, have the chance to
+                        <strong>make your wishes becoming true</strong>, feeling real connections with other investors and feeling lucky. For us the
                         <strong>community is the most important thing</strong>, we want you to feel confortable around our beautiful
                         candles.
                     </p>

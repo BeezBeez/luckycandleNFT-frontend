@@ -21,7 +21,7 @@ export const Button = styled.button`
         transform: translateY(-4px);
         box-shadow: 0 0 32px 8px rgba(15, 210, 80, 0.5), 0px 8px 8px -8px rgba(0, 0, 0, 0.4), 0px 28px 24px -12px rgba(0, 0, 0, 0.4), inset 0px 8px 16px rgba(255, 255, 255, 0.5);
     }
-
+    
     &:active {
         background-color: rgb(173, 245, 197);
         color: rgb(15, 210, 80);
@@ -29,8 +29,9 @@ export const Button = styled.button`
         transform: translateY(0px);
         box-shadow: 0 0 32px 8px rgb(15, 210, 80, 0.5), 0px 8px 8px -8px rgba(0, 0, 0, 0.4), 0px 28px 24px -12px rgba(0, 0, 0, 0.4), inset 0px 8px 24px rgba(0, 0, 0, 0.2);
     }
-
+    
     @media (max-width: 500px) {
+        padding: 12px 24px;
         font-size: 4vw;
     }
 `

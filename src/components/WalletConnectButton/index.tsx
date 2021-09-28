@@ -44,7 +44,7 @@ const ConnectionStatusDot = styled.div<{ connected: boolean }>`
 `
 
 const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
-    const injected = new InjectedConnector({ supportedChainIds: [1] });
+    const injected = new InjectedConnector({ supportedChainIds: [1, 3] });
     const context = useWeb3React<Web3Provider>();
     const { activate, deactivate, account } = context;
 

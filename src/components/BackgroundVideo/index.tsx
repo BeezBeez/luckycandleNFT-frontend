@@ -1,15 +1,15 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const fadeIn = (x: string) => keyframes`
+const fadeIn = (x: string, y?: string) => keyframes`
     0% {
-        filter: brightness(0.0) hue-rotate(160deg);
+        filter: brightness(0.0) hue-rotate(${y || '160deg'});
     }
     75% {
-        filter: brightness(0.0) hue-rotate(160deg);
+        filter: brightness(0.0) hue-rotate(${y || '160deg'});
     }
     100% {
-        filter: brightness(${x}) hue-rotate(160deg);
+        filter: brightness(${x}) hue-rotate(${y || '160deg'});
     }
 `;
 
@@ -25,7 +25,7 @@ const blurOut = (x: string) => keyframes`
     }
 `;
 
-const VideoComponent = styled.video<{ brightness: string, blurAnim?: boolean }>`
+const VideoComponent = styled.video<{ brightness: string, hue?: string, blurAnim?: boolean }>`
     background-size: cover;
     position: absolute;
     top: 0;
@@ -36,8 +36,8 @@ const VideoComponent = styled.video<{ brightness: string, blurAnim?: boolean }>`
     opacity: 1.0;
     width: 100%;
     height: auto;
-    filter: brightness(0) hue-rotate(160deg);
-    animation: ${props => props.blurAnim ? blurOut(props.brightness) : fadeIn(props.brightness)} 2.5s 0s alternate forwards;
+    filter: brightness(${props => props.brightness}) hue-rotate(${props => props.hue || '160deg'});
+    animation: ${props => props.blurAnim ? blurOut(props.brightness) : fadeIn(props.brightness, props.hue)} 2.5s 0s alternate forwards;
     overflow: hidden;
     
     @media (max-width: 1000px) {
@@ -50,9 +50,9 @@ const VideoComponent = styled.video<{ brightness: string, blurAnim?: boolean }>`
     }
 `;
 
-export const BackgroundVideo = (props: { name: string, brightness: string, blurAnim?: boolean }) => {
+export const BackgroundVideo = (props: { name: string, brightness: string, hue?: string, blurAnim?: boolean, style?: React.CSSProperties }) => {
     return (
-        <VideoComponent blurAnim={props.blurAnim} brightness={props.brightness} loop autoPlay muted playsInline>
+        <VideoComponent style={props.style} hue={props.hue} blurAnim={props.blurAnim} brightness={props.brightness} loop autoPlay muted playsInline>
             <source src={`${process.env.PUBLIC_URL}/assets/videos/${props.name}.mp4`} type="video/mp4" />
         </VideoComponent>
     )

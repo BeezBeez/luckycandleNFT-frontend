@@ -24,7 +24,7 @@ const NavigationContainer = styled.nav`
     
     @media (max-width: 500px) {
         display: inline-flex;
-        background-color: rgba(0, 40, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.4);
         backdrop-filter: none;
         height: 7vw;
     }
@@ -55,7 +55,7 @@ const MobileMenu = styled.nav<{ menuOpened: boolean }>`
 
     @media (max-width: 500px) {
         display: inline-flex;
-        background-color: rgba(0, 40, 0, 0.9);
+        background-color: rgba(0, 0, 0, 0.8);
         backdrop-filter: none;
     }
 `
