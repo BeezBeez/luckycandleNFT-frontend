@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Page, Subpage, TextContainer } from '../../components/Page';
-import { View } from '../../components/View';
 import { Title } from '../../components/Text';
 import { CollectionBorder, CollectionPreview } from '../../components/CollectionItems';
 

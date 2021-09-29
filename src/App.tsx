@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HashRouter as Router } from "react-router-dom";
 
-import { Web3Provider } from '@ethersproject/providers';
-import { Web3ReactProvider } from '@web3-react/core';
+import { DAppProvider } from '@usedapp/core';
 
 import WalletConnectButton from './components/WalletConnectButton';
 import { View } from './components/View';
@@ -16,14 +15,8 @@ const PageContainer = styled(View)`
 `
 
 function App() {
-  const getLibrary = (provider: any): Web3Provider => {
-    const library = new Web3Provider(provider)
-    library.pollingInterval = 12000
-    return library;
-  }
-
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
+    <DAppProvider config={{supportedChains: [1, 3]}}>
       {/* <AnimatedCursor color="255,255,255"/> */}
       <Router>
         <NavigationBar items={appRoutes} rightItems={rightLinks}>
@@ -45,7 +38,7 @@ function App() {
           }
         </PageContainer>
       </Router>
-    </Web3ReactProvider>
+    </DAppProvider>
   );
 }
 

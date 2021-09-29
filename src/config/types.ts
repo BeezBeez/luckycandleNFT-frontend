@@ -1,4 +1,4 @@
 export interface Contract {
-    1: string;
-    3: string;
+    "1": string;
+    "3": string;
 }

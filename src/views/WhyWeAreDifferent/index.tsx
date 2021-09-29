@@ -36,8 +36,8 @@ const WhyWeAreDifferent = () => {
                     </p>
                     <p>
                         Being part of the <strong>Lucky Candle project</strong> will let you participate in <strong>crazy events</strong>, have the chance to
-                        <strong>make your wishes becoming true</strong>, feeling real connections with other investors and feeling lucky. For us the
-                        <strong>community is the most important thing</strong>, we want you to feel confortable around our beautiful
+                        <strong> make your wishes becoming true</strong>, feeling real connections with other investors and feeling lucky. For us the
+                        <strong> community is the most important thing</strong>, we want you to feel confortable around our beautiful
                         candles.
                     </p>
                 </TextContainer>

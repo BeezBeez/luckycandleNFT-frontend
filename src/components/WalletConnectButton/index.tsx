@@ -1,6 +1,7 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { useWeb3React } from "@web3-react/core";
+import { ChainId, DAppProvider, useEtherBalance, useEthers } from '@usedapp/core'
 import styled from "styled-components";
 
 export const StyledConnectButton = styled.button<{ connected: boolean }>`
@@ -44,16 +45,16 @@ const ConnectionStatusDot = styled.div<{ connected: boolean }>`
 `
 
 const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
-    const injected = new InjectedConnector({ supportedChainIds: [1, 3] });
-    const context = useWeb3React<Web3Provider>();
-    const { activate, deactivate, account } = context;
+    const { activateBrowserWallet, account, deactivate } = useEthers();
 
     const isConnected = (account !== "" && account ? true : false);
     const onConnectClicked = (connected: boolean) => {
         if (connected) {
             deactivate();
         } else {
-            activate(injected);
+            activateBrowserWallet((error) => {
+                alert(error);
+            }, true);
         }
     }
 

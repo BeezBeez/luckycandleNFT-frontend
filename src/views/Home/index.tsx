@@ -6,11 +6,11 @@ import { Page, Subpage } from '../../components/Page';
 import { Button, PurpleButton } from '../../components/Buttons';
 import DropCountdown from '../../components/DropCountdown';
 import Clover from '../../components/Clover';
-import { Web3Provider } from '@ethersproject/providers';
-import { useWeb3React } from '@web3-react/core';
-import { InjectedConnector } from '@web3-react/injected-connector';
 import { CollectionPreview, CollectionBorder } from '../../components/CollectionItems';
 import { MintSlider } from '../../components/MintSlider';
+import { useEthers } from '@usedapp/core';
+import { useBuyCandle } from '../../hooks';
+import { utils } from 'ethers';
 
 const Title = styled.h1`
     font-family: 'Righteous';
@@ -70,8 +70,7 @@ const ButtonView = styled(View)`
 `
 
 const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
-    const context = useWeb3React<Web3Provider>();
-    const { account, chainId } = context;
+    const { account, chainId } = useEthers();
 
     const isConnected = (account !== "" && account ? true : false);
 
@@ -83,7 +82,7 @@ const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
             <BackgroundVideo brightness="0.7" name="red_blobs" />
             <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
                 <Title>Lucky Candle</Title>
-                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>LUCKY MINT </span>- OCTOBER 16 @ 9PM GMT</Subtitle>
+                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>LUCKY MINT </span>- OCTOBER 16 @ 11PM (Europe/Paris)</Subtitle>
                 <View>
                     <DropCountdown date={`Sat, 16 Oct ${isConnected && chainId === 3 ? '1407' : '2021'} 21:00:00 GMT`}>
                         {/* Date du drop : Samedi 16 Octobre 23h */}
@@ -164,22 +163,22 @@ const lerp = (a: number, b: number, t: number) => {
 }
 
 const MintTitle = styled(Title) <{ chance: number, intensity: number }>`
-    font-size: ${props => lerp(6, 5, props.chance / 3)}vw;
+    font-size: ${props => lerp(6, 4.5, props.chance / 6)}vw;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     text-align: center;
 
     text-shadow:
-        0 0 ${props => props.intensity / 3 * 5}px #fff,
-        0 0 ${props => props.intensity / 3 * 10}px #fff,
-        0 0 ${props => props.intensity / 3 * 20}px #fff,
-        0 0 ${props => props.intensity / 3 * 40}px #00ff73,
+        0 0 ${props => 4 + props.intensity / 3 * 5}px #fff,
+        0 0 ${props => 4 + props.intensity / 3 * 10}px #fff,
+        0 0 ${props => 4 + props.intensity / 3 * 20}px #fff,
+        0 0 ${props => 4 + props.intensity / 3 * 40}px #00ff73,
         0 0 ${props => props.intensity / 3 * 80}px #00ff73,
         0 0 ${props => props.intensity / 3 * 90}px #00ffd5,
         0 0 ${props => props.intensity / 3 * 100}px #00ffd5,
         0 0 ${props => props.intensity / 3 * 150}px #00ffd5;
 
     @media (max-width: 500px) {
-        font-size: ${props => lerp(7, 6, props.chance / 3)}vw;
+        font-size: ${props => lerp(7, 5.5, props.chance / 6)}vw;
     }
 `
 
@@ -191,11 +190,13 @@ const MintDescription = styled.h5`
 
 const MintSpan = styled.span<{ chance: number }>`
     font-family: 'Righteous';
-    font-size: ${props => lerp(1, 2, props.chance / 3)}em;
+    font-size: ${props => lerp(1, 3, props.chance / 6)}em;
 `
 
 const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHandler<HTMLInputElement> }> = (props) => {
     const [amount, setAmount] = useState(1);
+    const { chainId, library } = useEthers();
+    const { send: buyCandle } = useBuyCandle(chainId!, library!.getSigner(0));
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (props.onAmountChanged) {
@@ -205,41 +206,50 @@ const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHan
         setAmount(event.target.valueAsNumber);
     }
 
+    const onMintClicked = () => {
+        console.log('Mint', amount, 'NFT');
+        try {
+            buyCandle({ value: utils.parseEther((amount * 0.1).toString())}).then(() => {
+                console.log('Finished');
+            });
+        } catch(e) {
+            console.error(e);
+        }
+    }
+
     return (
         <>
-            <MintTitle style={{ filter: `hue-rotate(${lerp(0, 240, amount / 25)}deg)` }} intensity={lerp(-1, 1, props.chance / 3)} chance={props.chance}>Chance of RARE : <MintSpan chance={props.chance}>x{props.chance}</MintSpan></MintTitle>
+            <MintTitle style={{ filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }} intensity={lerp(-1, 1, props.chance / 6)} chance={props.chance}>Chance of RARE : <MintSpan chance={props.chance}>x{props.chance}</MintSpan></MintTitle>
             <MintDescription>Mint more NFT in a transaction to increase your chances to get a fuc**** rare LuckyCandle !</MintDescription>
             <View style={{ marginTop: 24 }}>
-                <MintSlider min={1} max={25} value={amount} onChange={onChange} />
-                <Button style={{ marginLeft: 32, filter: `hue-rotate(${lerp(0, 240, amount / 25)}deg)` }}>MINT {amount} NFT</Button>
+                <MintSlider min={1} max={50} value={amount} onChange={onChange} />
+                <Button onClick={onMintClicked} style={{ marginLeft: 32, filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }}>MINT {amount} NFT</Button>
             </View>
         </>
     )
 }
 
 const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
-    const injected = new InjectedConnector({ supportedChainIds: [1, 3] });
     const [chance, setChance] = useState(1);
     const [amount, setAmount] = useState(1);
-    const context = useWeb3React<Web3Provider>();
-    const { account, activate } = context;
+    const { activateBrowserWallet, account } = useEthers();
 
     const isConnected = (account !== "" && account ? true : false);
 
     const handleAmountChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChance(Math.floor(lerp(1, 3, event.target.valueAsNumber / 25)));
+        setChance(Math.floor(lerp(1, 6, event.target.valueAsNumber / 50)));
         setAmount(event.target.valueAsNumber);
     }
 
     return (
         <Content>
-            <BackgroundVideo blurAnim={false} hue={`${lerp(160, 360, amount / 25)}deg`} brightness="0.7" name="red_blobs" />
+            <BackgroundVideo blurAnim={false} hue={`${lerp(160, 360, amount / 50)}deg`} brightness="0.7" name="red_blobs" />
             <Subpage>
                 <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
-                    <Button style={{ filter: `hue-rotate(${lerp(0, 240, amount / 25)}deg)` }} onClick={props.onBackButtonClick}>{"< Back"}</Button>
-                    <NFTBorder style={{ filter: `hue-rotate(${lerp(0, 240, amount / 25)}deg)` }}>
+                    <Button style={{ filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }} onClick={props.onBackButtonClick}>{"< Back"}</Button>
+                    <NFTBorder style={{ filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }}>
                         <CollectionPreview src={`${process.env.PUBLIC_URL}/assets/images/NFTs/mint_unknown.gif`} />
-                        {chance > 1 && <NFTRare src={`${process.env.PUBLIC_URL}/assets/images/NFTs/67.jpg`} />}
+                        {chance > 3 && <NFTRare src={`${process.env.PUBLIC_URL}/assets/images/NFTs/67.jpg`} />}
                     </NFTBorder>
                 </View>
                 <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 16 }}>
@@ -247,7 +257,7 @@ const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
                         isConnected ?
                             <MintView chance={chance} onAmountChanged={handleAmountChanged} />
                             :
-                            <Button onClick={() => activate(injected)}>Connect your wallet</Button>
+                            <Button onClick={() => activateBrowserWallet()}>Connect your wallet</Button>
                     }
 
                 </View>
