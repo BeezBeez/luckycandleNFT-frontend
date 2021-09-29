@@ -3,10 +3,10 @@ import styled, { keyframes } from 'styled-components';
 
 const fadeIn = (x: string, y?: string) => keyframes`
     0% {
-        filter: brightness(0.0) hue-rotate(${y || '160deg'});
+        filter: brightness(${x}) hue-rotate(${y || '160deg'});
     }
     75% {
-        filter: brightness(0.0) hue-rotate(${y || '160deg'});
+        filter: brightness(${x}) hue-rotate(${y || '160deg'});
     }
     100% {
         filter: brightness(${x}) hue-rotate(${y || '160deg'});

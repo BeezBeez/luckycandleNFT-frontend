@@ -1,4 +1,4 @@
 export interface Contract {
-    mainnet: string;
-    testnet: string;
+    1: string;
+    3: string;
 }

@@ -6,12 +6,12 @@ export const CollectionBorder = styled.div`
     height: 22vw;
     margin: 32px;
     border: solid 2px rgb(170, 255, 196);
-    border-radius: 64px;
+    border-radius: 48px;
     box-shadow: 0px 0px 6px 2px rgb(126, 255, 154), 0px 0px 24px 4px rgb(40, 255, 112);
     overflow: hidden;
     
     @media (max-width: 500px) {
-        border-radius: 16px;
+        border-radius: 24px;
     }
 `;
 
