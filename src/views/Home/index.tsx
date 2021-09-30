@@ -10,7 +10,7 @@ import { CollectionPreview, CollectionBorder } from '../../components/Collection
 import { MintSlider } from '../../components/MintSlider';
 import { useEthers } from '@usedapp/core';
 import { useBuyCandle } from '../../hooks';
-import { utils } from 'ethers';
+import { utils, BigNumber } from 'ethers';
 
 const Title = styled.h1`
     font-family: 'Righteous';
@@ -82,7 +82,7 @@ const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
             <BackgroundVideo brightness="0.7" name="red_blobs" />
             <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
                 <Title>Lucky Candle</Title>
-                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>LUCKY MINT </span>- OCTOBER 16 @ 11PM (Europe/Paris)</Subtitle>
+                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>LUCKY MINT </span>- OCTOBER 16 @ 9PM GMT</Subtitle>
                 <View>
                     <DropCountdown date={`Sat, 16 Oct ${isConnected && chainId === 3 ? '1407' : '2021'} 21:00:00 GMT`}>
                         {/* Date du drop : Samedi 16 Octobre 23h */}
@@ -195,8 +195,9 @@ const MintSpan = styled.span<{ chance: number }>`
 
 const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHandler<HTMLInputElement> }> = (props) => {
     const [amount, setAmount] = useState(1);
-    const { chainId, library } = useEthers();
-    const { send: buyCandle } = useBuyCandle(chainId!, library!.getSigner(0));
+    const { chainId } = useEthers();
+    const { send: buyCandle, state: candleState } = useBuyCandle(chainId!);
+    
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (props.onAmountChanged) {
@@ -208,13 +209,11 @@ const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHan
 
     const onMintClicked = () => {
         console.log('Mint', amount, 'NFT');
-        try {
-            buyCandle({ value: utils.parseEther((amount * 0.1).toString())}).then(() => {
-                console.log('Finished');
-            });
-        } catch(e) {
-            console.error(e);
-        }
+        buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.1).toString())) });
+        candleState.transaction?.wait().then((value) => {
+            console.log("Transaction completed !");
+            console.log("Receipt :", value);
+        })
     }
 
     return (
@@ -257,7 +256,7 @@ const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
                         isConnected ?
                             <MintView chance={chance} onAmountChanged={handleAmountChanged} />
                             :
-                            <Button onClick={() => activateBrowserWallet()}>Connect your wallet</Button>
+                            <Button onClick={() => activateBrowserWallet(undefined, true)}>Connect your wallet</Button>
                     }
 
                 </View>

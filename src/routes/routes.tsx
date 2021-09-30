@@ -60,12 +60,12 @@ export const appRoutes: RouteEntry[] = [
 ]
 
 export const rightLinks: RouteEntry[] = [
-    {
-        to: "https://opensea.io/collection/luckycandle",
-        name: '$opensea',
-        displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/opensea.png`} alt="opensea" />,
-        content: null
-    },
+    // {
+    //     to: "https://opensea.io/collection/luckycandle",
+    //     name: '$opensea',
+    //     displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/opensea.png`} alt="opensea" />,
+    //     content: null
+    // },
     {
         to: "https://discord.gg/3jTTMx8D3j",
         name: '$discord-server',
@@ -84,10 +84,10 @@ export const rightLinks: RouteEntry[] = [
         displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/instagram.png`} alt="instagram" />,
         content: null
     },
-    {
-        to: "https://telegram.com/luckycandle_nft",
-        name: '$telegram-group',
-        displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/telegram.png`} alt="telegram" />,
-        content: null
-    },
+    // {
+    //     to: "https://telegram.com/luckycandle_nft",
+    //     name: '$telegram-group',
+    //     displayName: <Icon src={`${process.env.PUBLIC_URL}/assets/images/icons/telegram.png`} alt="telegram" />,
+    //     content: null
+    // },
 ]
