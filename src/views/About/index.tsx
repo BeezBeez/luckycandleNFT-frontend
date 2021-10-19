@@ -10,8 +10,8 @@ const About = () => {
                 <TextContainer>
                     <Title>OUR STORY</Title>
                     <p>
-                        2021 was so crazy for the moment that the <strong>candles also wanted to participate in the market
-                        euphoria</strong>, the candlestick has broken his resistance, 13 000 candles managed to <strong>escaped the
+                        2021 is crazy as of right now, which is why the <strong>candles also wanted to participate in the market
+                        euphoria</strong>, the candlestick has broken its resistance, 13 000 candles managed to <strong>escape the
                             cryptocurrency charts.</strong>
                     </p>
                     <p>
@@ -21,13 +21,13 @@ const About = () => {
                     </p>
                     <p>
                         But before capturing them, they asked us one particular thing: to distribute them throught the world, so that 
-                        each of them <strong>shares luck and equality.</strong>
+                        each of them <strong>share luck and equality.</strong>
                     </p>
                     <p>
                         It looks like the crypto universe is <strong>giving us a mission.</strong>
                     </p>
                     <p style={{fontStyle: 'italic', fontWeight: 'bold'}}>
-                        Are you guys ready to participate in this mission with us and spray your knowledge and luck through
+                        Are you guys ready to join this mission with us and spray your knowledge and luck throughout
                         the world ?
                     </p>
                 </TextContainer>

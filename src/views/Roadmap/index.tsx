@@ -115,33 +115,33 @@ const Roadmap = () => {
                     <DescriptionContainer>
                         <p>
                             A trip to El Salvador to be won will be unlocked
-                            for some lucky investors
+                            for 4 lucky investors
                         </p>
                     </DescriptionContainer>
                 </Point>
                 <MDescriptionContainer>
                     <p>
                         A trip to El Salvador to be won will be unlocked
-                        for some lucky investors
+                        for 4 lucky investors
                     </p>
                 </MDescriptionContainer>
                 <Point>
                     <h5>50%</h5>
                     <DescriptionContainer inverseDirection>
-                        <p>Unlocking a world tour</p>
+                        <p>Unlocking a world tour for 4 people</p>
                     </DescriptionContainer>
                 </Point>
                 <MDescriptionContainer>
-                    <p>Unlocking a world tour</p>
+                    <p>Unlocking a world tour for 4 people</p>
                 </MDescriptionContainer>
                 <Point>
                     <h5>75%</h5>
                     <DescriptionContainer>
-                        <p>Make a wish, we make it come true</p>
+                        <p>Make a wish, we will make it come true</p>
                     </DescriptionContainer>
                 </Point>
                 <MDescriptionContainer>
-                    <p>Make a wish, we make it come true</p>
+                    <p>Make a wish, we will make it come true</p>
                 </MDescriptionContainer>
                 <Point>
                     <h5>100%</h5>

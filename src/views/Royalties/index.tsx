@@ -22,13 +22,11 @@ const Royalties = () => {
                 <TextContainer style={{ backgroundColor: 'rgb(0, 80, 50)', alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column', height: '140%' }}>
                     <Title>ROYALTIES SYSTEM</Title>
                     <p>
-                        <strong>We want to put 5% of secondary market sales directly back into your pockets.</strong> We want that holding
-                        our NFT and helping the project to grow. We want to make sure that keeping our NFTs in your
-                        possession and supporting the project can be of maximum benefit to you.
+                        <strong>We will put 5% of secondary market sales directly back to your pockets.</strong> We will make sure that keeping our NFTs and supporting the project can be benefit you a maximum !
                     </p>
                     <p>
                         <strong>Our roadmap</strong> is here to let you see what we are planning to do for the community. <strong>Why we will be
-                        useful to you in the future.</strong> You deserve to be threated well.
+                            useful to you in the future.</strong> You deserve to be treated well.
                     </p>
                 </TextContainer>
             </Subpage>

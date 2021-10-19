@@ -14,11 +14,11 @@ const Philosophy = () => {
                     <Title>PROJECT'S PHILOSOPHY</Title>
                     <p>
                         <strong>Lucky Candle</strong> is a collection of <strong>13 000 unique NFT’s</strong> on the Ethereum Blockchain that can be
-                        mint for <strong>0.1 ETH</strong>. It’s an NFT project based on the <strong>Japanese candles</strong> that you all love to see on your
-                        charts. More likely when they are green.
+                        mint for <strong>0.1 ETH</strong>. It’s an NFT project based on the <strong>Japanese candles</strong> that you love to see on the 
+                        charts. Most likely when they are green.
                     </p>
                     <p>
-                        We are a project that feels that it’s important for us to <strong>put the community first.</strong>
+                        For us the most important part of the project is <strong>putting the community first.</strong>
                     </p>
                     <p>
                         We want to give you access to a variety of things, to <strong>build a close-knit community who’s bringing you

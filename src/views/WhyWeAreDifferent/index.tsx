@@ -31,12 +31,12 @@ const WhyWeAreDifferent = () => {
                 <TextContainer style={{ alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
                     <Title>WHY WE ARE DIFFERENT</Title>
                     <p>
-                        <strong>We want to build a community</strong> where the chance to be succesfull in the project is equal for
-                        everybody. <strong>Even if you have a big or a small wallet.</strong>
+                        <strong>We want to build a community</strong> which everyone has a chance to be successful. 
+                        <strong> Even if you have a big or a small wallet.</strong>
                     </p>
                     <p>
-                        Being part of the <strong>Lucky Candle project</strong> will let you participate in <strong>crazy events</strong>, have the chance to
-                        <strong> make your wishes becoming true</strong>, feeling real connections with other investors and feeling lucky. For us the
+                        Being part of the <strong>Lucky Candle project</strong> will let you join <strong>crazy events</strong>, get the chance to
+                        <strong> make your dreams come true</strong>, feeling real connections with other investors. For us the
                         <strong> community is the most important thing</strong>, we want you to feel confortable around our beautiful
                         candles.
                     </p>
@@ -44,13 +44,11 @@ const WhyWeAreDifferent = () => {
                 <MobileTextContainer style={{ backgroundColor: 'rgb(0, 80, 50)', alignItems: 'start', textAlign: 'start', justifyContent: 'center', flexDirection: 'column' }}>
                     <Title>ROYALTIES SYSTEMS</Title>
                     <p>
-                        <strong>We want to put 5% of secondary market sales directly back into your pockets.</strong> We want that holding
-                        our NFT and helping the project to grow. We want to make sure that keeping our NFTs in your
-                        possession and supporting the project can be of maximum benefit to you.
+                        <strong>We will put 5% of secondary market sales directly back to your pockets.</strong> We will make sure that keeping our NFTs and supporting the project can be benefit you a maximum !
                     </p>
                     <p>
                         <strong>Our roadmap</strong> is here to let you see what we are planning to do for the community. <strong>Why we will be
-                        useful to you in the future.</strong> You deserve to be threated well.
+                        useful to you in the future.</strong> You deserve to be treated well.
                     </p>
                 </MobileTextContainer>
             </MSubpage>

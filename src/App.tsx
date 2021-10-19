@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <DAppProvider config={{ supportedChains: [1, 3] }}>
-        <AnimatedCursor style={{zIndex: 1001}} color="255, 255, 255"/>
+        {/* <AnimatedCursor style={{zIndex: 1001}} color="255, 255, 255"/> */}
         <Router>
           <NavigationBar items={appRoutes} rightItems={rightLinks}>
             <WalletConnectButton connected={false} />
