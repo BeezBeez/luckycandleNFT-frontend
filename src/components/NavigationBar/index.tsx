@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { HashLink as Link } from 'react-router-hash-link';
+import { useHistory } from "react-router";
 import { NavigationBarProps, NavigationItemProps } from './types';
 import Logo from "../Logo";
 
@@ -29,7 +30,6 @@ const NavigationContainer = styled.nav`
         height: 7vw;
     }
 `
-
 
 const MobileMenu = styled.nav<{ menuOpened: boolean }>`
     display: flex;
@@ -168,13 +168,18 @@ const MenuButton = styled.img`
     }
 `
 
-export const NavigationItem: React.FC<NavigationItemProps> = (props) => {
+export const NavigationItem: React.FC<NavigationItemProps & {returnToHome?: () => void}> = (props) => {
     const LinkRender = () => {
+
         return (
             props.path.includes('https://') ?
                 <StyledAnchor noHoverEffect={props.name.includes('$')} href={props.path} target="_blank">{props.displayName}</StyledAnchor>
                 :
-                <StyledLink noHoverEffect={props.name.includes('$')} to={props.path}>{props.displayName}</StyledLink>
+                <StyledLink onClick={() => {
+                    if (props.returnToHome) {
+                        props.returnToHome();
+                    }
+                }} noHoverEffect={props.name.includes('$')} to={props.path}>{props.displayName}</StyledLink>
         )
     }
     return (
@@ -184,6 +189,7 @@ export const NavigationItem: React.FC<NavigationItemProps> = (props) => {
 
 export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
     const [menuOpened, setMenuOpened] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
         window.addEventListener('resize', () => {
@@ -192,6 +198,11 @@ export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
             }
         });
     }, [menuOpened])
+
+    const returnToHome = () => {
+        setMenuOpened(false);
+        history.push('/');
+    }
 
     return (
         <>
@@ -203,7 +214,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
                         props.items.map((entry) => {
                             return (
                                 <NavLI>
-                                    {entry.to !== "" && <NavigationItem key={`items_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />}
+                                    {entry.to !== "" && <NavigationItem returnToHome={returnToHome} key={`items_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />}
                                 </NavLI>
                             );
                         })
@@ -231,7 +242,7 @@ export const NavigationBar: React.FC<NavigationBarProps> = (props) => {
                         props.items.map((entry) => {
                             return (
                                 <NavLI style={{ display: 'flex' }}>
-                                    {entry.to !== "" && <NavigationItem key={`items_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />}
+                                    {entry.to !== "" && <NavigationItem returnToHome={returnToHome} key={`items_${entry.name}`} name={entry.name} path={entry.to} displayName={entry.displayName} />}
                                 </NavLI>
                             );
                         })

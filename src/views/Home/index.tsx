@@ -9,7 +9,7 @@ import Clover from '../../components/Clover';
 import { CollectionPreview, CollectionBorder } from '../../components/CollectionItems';
 import { MintSlider } from '../../components/MintSlider';
 import { useEthers } from '@usedapp/core';
-import { useBuyCandle } from '../../hooks';
+import { useBuyCandle, useEarlyBuyCandle, useWhitelisted } from '../../hooks';
 import { utils, BigNumber } from 'ethers';
 
 const Title = styled.h1`
@@ -82,7 +82,7 @@ const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
             <BackgroundVideo brightness="0.7" name="red_blobs" />
             <View style={{ flexDirection: 'column', textAlign: 'center', alignItems: 'center' }}>
                 <Title>Lucky Candle</Title>
-                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>DROP 1 / 4 (3 250 NFTs)</span>- OCTOBER 23 @ 9PM GMT</Subtitle>
+                <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>DROP 1/4 (3 250 NFTs) </span>- OCTOBER 23 @ 9PM GMT</Subtitle>
                 <View>
                     <DropCountdown date={`Sat, 23 Oct ${isConnected && chainId === 3 ? '1407' : '2021'} 21:00:00 GMT`}>
                         {/* Date du drop : Samedi 23 Octobre 23h */}
@@ -195,9 +195,10 @@ const MintSpan = styled.span<{ chance: number }>`
 
 const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHandler<HTMLInputElement> }> = (props) => {
     const [amount, setAmount] = useState(1);
-    const { chainId } = useEthers();
+    const { chainId, account } = useEthers();
     const { send: buyCandle, state: candleState } = useBuyCandle(chainId!);
-
+    const { send: earlyBuyCandle, state: earlyCandleState } = useEarlyBuyCandle(chainId!);
+    const isWhitelisted = useWhitelisted(chainId!, account!);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (props.onAmountChanged) {
@@ -207,13 +208,19 @@ const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHan
         setAmount(event.target.valueAsNumber);
     }
 
-    const onMintClicked = () => {
+    const OnMintClicked = async () => {
         console.log('Mint', amount, 'NFT');
-        buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.1).toString())) });
-        candleState.transaction?.wait().then((value) => {
-            console.log("Transaction completed !");
-            console.log("Receipt :", value);
-        })
+        if (isWhitelisted) {
+            if (isWhitelisted[0]) {
+                await earlyBuyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+                return;
+            } else {
+                await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+                return;
+            }
+        } else {
+            await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+        }
     }
 
     return (
@@ -221,8 +228,8 @@ const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHan
             <MintTitle style={{ filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }} intensity={lerp(-1, 1, props.chance / 6)} chance={props.chance}>Chance of RARE : <MintSpan chance={props.chance}>x{props.chance}</MintSpan></MintTitle>
             <MintDescription>Mint more NFT in a transaction to increase your chances to get a fuc**** rare LuckyCandle !</MintDescription>
             <View style={{ marginTop: 24 }}>
-                <MintSlider min={1} max={50} value={amount} onChange={onChange} />
-                <Button onClick={onMintClicked} style={{ marginLeft: 32, filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }}>MINT {amount} NFT</Button>
+                <MintSlider min={1} max={isWhitelisted && (isWhitelisted[0] ? 2 : 50)} value={amount} onChange={onChange} />
+                <Button onClick={OnMintClicked} style={{ marginLeft: 32, filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }}>MINT {amount} NFT</Button>
             </View>
         </>
     )

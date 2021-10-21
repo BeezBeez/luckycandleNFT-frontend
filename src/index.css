@@ -60,22 +60,22 @@ p {
     width: 100vw;
   }
   h1 {
-    font-size: 4vw;
+    font-size: 6vw;
   }
   h2 {
-    font-size: 3vw;
+    font-size: 5.5vw;
   }
   h3 {
-    font-size: 2.5vw;
+    font-size: 5vw;
   }
   h4 {
-    font-size: 1.7em;
+    font-size: 4vw;
   }
   h5 {
-    font-size: 3.5vw;
+    font-size: 3vw;
   }
   h6 {
-    font-size: 1em;
+    font-size: 2vw;
   }
   p {
     font-size: 3vw;
@@ -87,7 +87,8 @@ p {
 
 ::-webkit-scrollbar {
   width: 8px;
-  height: 0px;
+  height: 4px;
+  border-radius: 4px;
 }
 
 /* Track */
@@ -95,12 +96,14 @@ p {
 ::-webkit-scrollbar-track {
   background: rgb(0, 55, 29);
   padding: 64px;
+  border-radius: 4px;
 }
 
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
   background: rgb(0, 126, 78);
+  border-radius: 4px;
 }
 
 /* Handle on hover */

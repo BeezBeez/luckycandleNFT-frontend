@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+export const Button = styled.button<{small?: boolean}>`
     display: flex;
     border: none;
-    padding: 16px 32px;
-    border-radius: 12px;
+    padding: ${props => props.small ? '8px 16px' : '16px 32px'};
+    border-radius: ${props => props.small ? '8px' : '12px'};
     align-items: center;
     justify-content: center;
     background-color: rgb(15, 210, 80);
     color: white;
     font-weight: bold;
     font-size: 1.5vw;
+    font-size: ${props => props.small ? '1.5vw' : '1.75vw'};
     transition: all 0.3s cubic-bezier(0.77, 0, 0.175, 1);
     box-shadow: 0 0 32px rgba(15, 210, 80, 0.5), 0px 4px 4px -4px rgba(0, 0, 0, 0.4), 0px 16px 8px -8px rgba(0, 0, 0, 0.4);
     
@@ -31,8 +32,8 @@ export const Button = styled.button`
     }
     
     @media (max-width: 500px) {
-        padding: 12px 24px;
-        font-size: 4vw;
+        padding: ${props => props.small ? '8px 16px' : '12px 24px'};
+        font-size: ${props => props.small ? '3vw' : '4vw'};
     }
 `
 

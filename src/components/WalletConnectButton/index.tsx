@@ -1,5 +1,7 @@
+import { useHistory } from 'react-router';
 import { useEthers } from '@usedapp/core'
 import styled from "styled-components";
+import { useState } from 'react';
 
 export const StyledConnectButton = styled.button<{ connected: boolean }>`
     display: flex;
@@ -42,14 +44,21 @@ const ConnectionStatusDot = styled.div<{ connected: boolean }>`
 `
 
 const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
-    const { activateBrowserWallet, account, deactivate } = useEthers();
+    const { activateBrowserWallet, account } = useEthers();
+    const history = useHistory();
+    const [dummyState, setDummyState] = useState(false);
 
     const isConnected = (account !== "" && account ? true : false);
     const onConnectClicked = (connected: boolean) => {
-        if (connected) {
-            deactivate();
-        } else {
+        if (!connected) {
             activateBrowserWallet(undefined, true);
+        } else {
+            setDummyState(!dummyState)
+            if (history.location.pathname.includes('dashboard')) {
+                history.push('/');
+            } else {
+                history.push('/dashboard/wallet');
+            }
         }
     }
 
@@ -60,7 +69,7 @@ const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
             <ConnectionStatusDot connected={isConnected} />
             {
                 isConnected && account ?
-                    <span>{`${account.substring(0, 6)}...${account.substring(account.length - 4)}`}</span> :
+                    <span>Dashboard</span> :
                     <span>Connect wallet</span>
             }
         </StyledConnectButton>
