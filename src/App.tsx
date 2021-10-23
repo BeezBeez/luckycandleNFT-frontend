@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ErrorBoundary } from 'react-error-boundary';
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import { DAppProvider } from '@usedapp/core';
@@ -17,39 +18,45 @@ const PageContainer = styled(View)`
 `
 
 function App() {
+  const errorHandler = (error: Error, info: { componentStack: string }) => {
+    console.warn(error);
+  }
+
   return (
     <>
-      <DAppProvider config={{ supportedChains: [1, 3] }}>
-        <Router>
-          <NavigationBar items={appRoutes} rightItems={rightLinks}>
-            <WalletConnectButton connected={false} />
-          </NavigationBar>
+      <ErrorBoundary fallbackRender={() => (<></>)} onError={errorHandler}>
+        <DAppProvider config={{ supportedChains: [1, 3, 4] }}>
+          <Router>
+            <NavigationBar items={appRoutes} rightItems={rightLinks}>
+              <WalletConnectButton connected={false} />
+            </NavigationBar>
 
-          <Switch>
-            <Route exact path='/'>
-              <PageContainer>
-                {
-                  appRoutes.map((route) => {
-                    return (
-                      <>
-                        <View id={route.name} />
-                        {
-                          route.content
-                        }
-                      </>
-                    )
-                  })
-                }
-              </PageContainer>
-            </Route>
+            <Switch>
+              <Route exact path='/'>
+                <PageContainer>
+                  {
+                    appRoutes.map((route) => {
+                      return (
+                        <>
+                          <View id={route.name} />
+                          {
+                            route.content
+                          }
+                        </>
+                      )
+                    })
+                  }
+                </PageContainer>
+              </Route>
 
-            <Route path='/dashboard'>
-              <Dashboard />
-            </Route>
-          </Switch>
-        </Router>
-      </DAppProvider>
-      <NotificationContainer />
+              <Route path='/dashboard'>
+                <Dashboard />
+              </Route>
+            </Switch>
+          </Router>
+        </DAppProvider>
+        <NotificationContainer />
+      </ErrorBoundary>
     </>
   );
 }

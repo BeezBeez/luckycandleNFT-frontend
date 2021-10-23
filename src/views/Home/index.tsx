@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BackgroundVideo } from '../../components/BackgroundVideo';
 import { View } from '../../components/View';
@@ -9,8 +9,9 @@ import Clover from '../../components/Clover';
 import { CollectionPreview, CollectionBorder } from '../../components/CollectionItems';
 import { MintSlider } from '../../components/MintSlider';
 import { useEthers } from '@usedapp/core';
-import { useBuyCandle, useEarlyBuyCandle, useWhitelisted } from '../../hooks';
+import { useBuyCandle, useEarlyBuyCandle, useWhitelisted, useTotalSupply } from '../../hooks';
 import { utils, BigNumber } from 'ethers';
+import ProgressBar from '../../components/ProgressBar';
 
 const Title = styled.h1`
     font-family: 'Righteous';
@@ -71,6 +72,7 @@ const ButtonView = styled(View)`
 
 const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
     const { account, chainId } = useEthers();
+    const isWhitelisted = useWhitelisted(chainId!, account!);
 
     const isConnected = (account !== "" && account ? true : false);
 
@@ -84,7 +86,7 @@ const HomeContent: React.FC<{ onMintButtonClick: () => void }> = (props) => {
                 <Title>Lucky Candle</Title>
                 <Subtitle><span style={{ color: 'rgb(70, 255, 153)' }}>DROP 1/4 (3 250 NFTs) </span>- OCTOBER 23 @ 9PM GMT</Subtitle>
                 <View>
-                    <DropCountdown date={`Sat, 23 Oct ${isConnected && chainId === 3 ? '1407' : '2021'} 21:00:00 GMT`}>
+                    <DropCountdown date={`Sat, 23 Oct ${isConnected && (chainId === 3 || chainId === 4 || (isWhitelisted ? (isWhitelisted[0]) : false)) ? '1407' : '2021'} 21:00:00 GMT`}>
                         {/* Date du drop : Samedi 23 Octobre 23h */}
                         <ButtonView>
                             <Button onClick={props.onMintButtonClick}>Mint your LuckyCandle.</Button>
@@ -193,11 +195,46 @@ const MintSpan = styled.span<{ chance: number }>`
     font-size: ${props => lerp(1, 3, props.chance / 6)}em;
 `
 
+const BlackOverlay = styled(View)`
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    backdrop-filter: blur(32px);
+`
+
+const ErrorCard = styled(View)`
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw;
+    border: 1px solid rgb(200, 35, 80);
+    border-radius: 16px;
+    box-shadow: 0 0 16px rgb(255, 40, 120);
+`
+
+const ErrorOverlay: React.FC<{ error: string, requestClose: () => void }> = (props) => {
+    return (
+        <BlackOverlay>
+            <ErrorCard>
+                <h4>Transaction error</h4>
+                <h6>{props.error}</h6>
+                <PurpleButton small onClick={props.requestClose}>Close</PurpleButton>
+            </ErrorCard>
+        </BlackOverlay>
+    )
+}
+
 const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHandler<HTMLInputElement> }> = (props) => {
     const [amount, setAmount] = useState(1);
+    const [showError, setShowError] = useState({
+        show: false,
+        message: ""
+    });
+
     const { chainId, account } = useEthers();
-    const { send: buyCandle, state: candleState } = useBuyCandle(chainId!);
-    const { send: earlyBuyCandle, state: earlyCandleState } = useEarlyBuyCandle(chainId!);
+    const { send: buyCandle, state: buyCandleState } = useBuyCandle(chainId!);
+    const { send: earlyBuyCandle, state: earlyBuyCandleState } = useEarlyBuyCandle(chainId!);
     const isWhitelisted = useWhitelisted(chainId!, account!);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -209,22 +246,38 @@ const MintView: React.FC<{ chance: number, onAmountChanged: React.ChangeEventHan
     }
 
     const OnMintClicked = async () => {
-        console.log('Mint', amount, 'NFT');
         if (isWhitelisted) {
             if (isWhitelisted[0]) {
-                await earlyBuyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+                await earlyBuyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.1).toString())) });
+                setShowError({
+                    show: earlyBuyCandleState.status === 'Exception' || earlyBuyCandleState.status === 'Fail',
+                    message: earlyBuyCandleState.errorMessage!
+                })
                 return;
             } else {
-                await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+                await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.1).toString())) });
+                setShowError({
+                    show: buyCandleState.status === 'Exception' || buyCandleState.status === 'Fail',
+                    message: buyCandleState.errorMessage!
+                })
                 return;
             }
         } else {
-            await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.01).toString())) });
+            await buyCandle(BigNumber.from(amount.toString()), { value: BigNumber.from(utils.parseEther((amount * 0.1).toString())) });
+            setShowError({
+                show: buyCandleState.status === 'Exception' || buyCandleState.status === 'Fail',
+                message: buyCandleState.errorMessage!
+            })
         }
+    }
+
+    const handleRequestClose = () => {
+        setShowError({show: false, message: ''});
     }
 
     return (
         <>
+            {showError.show && <ErrorOverlay requestClose={handleRequestClose} error={showError.message} />}
             <MintTitle style={{ filter: `hue-rotate(${lerp(0, 240, amount / 50)}deg)` }} intensity={lerp(-1, 1, props.chance / 6)} chance={props.chance}>Chance of RARE : <MintSpan chance={props.chance}>x{props.chance}</MintSpan></MintTitle>
             <MintDescription>Mint more NFT in a transaction to increase your chances to get a fuc**** rare LuckyCandle !</MintDescription>
             <View style={{ marginTop: 24 }}>
@@ -258,7 +311,8 @@ const PriceRibbon = styled(View)`
 const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
     const [chance, setChance] = useState(1);
     const [amount, setAmount] = useState(1);
-    const { activateBrowserWallet, account } = useEthers();
+    const { activateBrowserWallet, account, chainId } = useEthers();
+    const totalSupply = useTotalSupply(chainId!);
 
     const isConnected = (account !== "" && account ? true : false);
 
@@ -278,6 +332,9 @@ const MintPage: React.FC<{ onBackButtonClick: () => void }> = (props) => {
                         {chance > 1 && <NFTRare src={`${process.env.PUBLIC_URL}/assets/images/NFTs/67.jpg`} />}
                     </NFTBorder>
                     <PriceRibbon style={{ filter: `hue-rotate(${lerp(0, 10, amount / 50)}deg)` }}>0.1 ETH/NFT</PriceRibbon>
+                    <View style={{ marginTop: 8, width: '100%' }}>
+                        <ProgressBar min={0} max={3250} value={0 || totalSupply ? (totalSupply![0] as BigNumber).toNumber() : 0} />
+                    </View>
                 </View>
                 <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin: 16 }}>
                     {

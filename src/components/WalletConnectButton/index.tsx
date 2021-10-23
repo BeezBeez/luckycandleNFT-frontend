@@ -15,15 +15,24 @@ export const StyledConnectButton = styled.button<{ connected: boolean }>`
     border-radius: 12px;
     font-size: 20px;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
     
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
     &:hover {
         background-color:  ${props => props.connected ? "rgba(0,255,90,0.4)" : "rgba(255,50,90,0.4)"};
-        cursor: pointer;
     }
     
     &:active {
         background-color:  ${props => props.connected ? "rgba(0,255,90,0.3)" : "rgba(255,50,90,0.3)"};
         transform: scale(0.95);
+        
+        &:disabled {
+            transform: scale(1.0);
+        }
     }
     
     @media (max-width: 500px) {
@@ -63,7 +72,7 @@ const WalletConnectButton: React.FC<{ connected: boolean }> = (props) => {
     }
 
     return (
-        <StyledConnectButton connected={isConnected} onClick={() => {
+        <StyledConnectButton disabled={isConnected} connected={isConnected} onClick={() => {
             onConnectClicked(isConnected);
         }}>
             <ConnectionStatusDot connected={isConnected} />
